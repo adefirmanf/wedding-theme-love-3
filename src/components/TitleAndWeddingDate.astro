@@ -1,0 +1,34 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="wpo-wedding-date">
+  <div class="container">
+    <h2
+      class="wow fadeInUp"
+      data-wow-duration="1000ms"
+      style="margin-top: 20px;"
+    >
+      <span class="shape-1"><img src="/images/slider/shape.png" alt="" /></span>
+      {title}
+      <span class="shape-2"
+        ><img src="/images/slider/shape2.png" alt="" />
+      </span>
+    </h2>
+    <p class="wow fadeInUp" data-wow-duration="1200ms">
+      We Are Getting Married November 15,2022
+    </p>
+    <div class="row wow fadeInUp" data-wow-duration="1400ms">
+      <div class="col col-xs-12">
+        <div class="clock-grids">
+          <div id="clock"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end container -->
+</section>
