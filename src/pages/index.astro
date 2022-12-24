@@ -1,28 +1,42 @@
 ---
+import Header from "../components/Header.astro";
 import Main from "../layouts/Main.astro";
 import TitleAndWeddingDate from "../components/TitleAndWeddingDate.astro";
 import GroomProfile from "../components/GroomProfile.astro";
+import BrideProfile from "../components/BrideProfile.astro";
 
 // Fetching an API
-const response = await fetch(
-  "http://localhost:1337/api/wedding-invitations/1",
-  {
-    headers: {
-      Authorization:
-        "Bearer " +
-        "3f48546e31447a029374c477a61684876b749c194d833e9d197a59a695a052d9089a3a948437ca729e362e3fe1b2392c4195b8bb30c4bf122ee9a0df283c213c3f7ba3ab4d4ccecf7940ccc6dec1b9a856e47d1287ac2d0c7be71ef4a81d6888ac83714aa26ed83d342f71d427098d74e105d1d54d8ce0d83d9df9dad8b8124b",
-    },
-  }
-);
+const response = await fetch("http://localhost:1337/api/love-3-templates/1", {
+  headers: {
+    Authorization:
+      "Bearer " +
+      "3f48546e31447a029374c477a61684876b749c194d833e9d197a59a695a052d9089a3a948437ca729e362e3fe1b2392c4195b8bb30c4bf122ee9a0df283c213c3f7ba3ab4d4ccecf7940ccc6dec1b9a856e47d1287ac2d0c7be71ef4a81d6888ac83714aa26ed83d342f71d427098d74e105d1d54d8ce0d83d9df9dad8b8124b",
+  },
+});
 const data = await response.json();
-console.log(data.data);
 // const title = "Ade & Rifdah";
-const { title } = data.data.attributes;
+const {
+  bride_and_groom_title,
+  married_on,
+  groom_description,
+  bride_description,
+} = data.data.attributes;
+const [groom, bride] = bride_and_groom_title.split("&");
 ---
 
 <Main>
-  <TitleAndWeddingDate title={title} />
-  <GroomProfile name="Ade" description="Lorem ipsum" slot="groom-profile" />
+  <Header slot="header" />
+  <TitleAndWeddingDate title={bride_and_groom_title} date={married_on} />
+  <GroomProfile
+    name={groom}
+    description={groom_description}
+    slot="groom-profile"
+  />
+  <BrideProfile
+    name={bride}
+    description={bride_description}
+    slot="bride-profile"
+  />
 </Main>
 
 <style>
